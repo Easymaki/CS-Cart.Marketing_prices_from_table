@@ -40,7 +40,7 @@
     {if $updated_products.products}
         {if !empty($requests.status)}
             {if $requests.status=='preview'}
-                <h4>{__("price_update_results")} ({__("preview")})</h4>
+                <h4>({__("preview")}) | {__("download_csv_file_with")} <a href="{$updated_products.file}"></a></h4>
             {else}
             <h4>{__("price_update_results")} | {__("download_csv_file_with")} <a href="{$updated_products.file}">{__(price_update_results)}</a></h4>
             {/if}
