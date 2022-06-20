@@ -1,6 +1,5 @@
 <?php
 
-
 function fn_get_cart_prices_chart()
 {
     $results = db_get_array("SELECT id, low_range, high_range, price FROM ?:cart_price_chart");
