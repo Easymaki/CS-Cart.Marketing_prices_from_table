@@ -5,7 +5,7 @@ function fn_get_cart_prices_chart()
 {
     $results = db_get_array("SELECT id, low_range, high_range, price FROM ?:cart_price_chart");
 	
-	return $results;
+    return $results;
 }
 
 function fn_update_cart_prices_chart($data)
@@ -36,7 +36,7 @@ function fn_update_prices($category_id, $group_id, $status)
 {
     $result = array(
 		'products' => array(),
-        'file' => ''
+        	'file' => ''
 	);
     
     $chart = fn_get_cart_prices_chart();
@@ -134,21 +134,11 @@ function fn_get_groups()
 function fn_get_price_from_chart($chart, $cprice, $rarity)
 {
     foreach ($chart as $row) {
-
         if ($cprice >= $row['low_range'] && $cprice <= $row['high_range']) {
             $result_price = $row['price'];
-        } elseif ($cprice <= 0.24 && ($rarity == 'C' || $rarity == 'Common' || $rarity == 'common')) {
-				$result_price = 0.24;
-        } elseif ($cprice <= 0.98 && ($rarity == 'U' || $rarity == 'Uncommon' || $rarity == 'uncommon')) {
-            $result_price = 0.98;
-        } elseif ($cprice <= 1.48 && ($rarity == 'R' || $rarity == 'Rare' || $rarity == 'rare')) {
-            $result_price = 1.48;
-        } elseif ($cprice <= 2.48 && ($rarity == 'M' || $rarity == 'Mythic' || $rarity == 'mythic')) {
-            $result_price = 2.48;
         } elseif (empty($result_price)) {
                 $result_price = $cprice;
         }
-
     }
     return $result_price;
 }
