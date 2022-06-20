@@ -54,8 +54,6 @@
                         <th>{__("stock")}</th>
                         <th>{__("old_price")}</th>
                         <th>{__("new_price")}</th>
-                        <th>{__("old_foil_price")}</th>
-                        <th>{__("new_foil_price")}</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -66,8 +64,6 @@
                             <td>{$product.stock}</td>
                             <td>{$product.old_price}</td>
                             <td>{$product.new_price}</td>
-                            <td>{$product.old_foil_price}</td>
-                            <td>{$product.new_foil_price}</td>
                         </tr>
                     {/foreach}
                 </tbody>
