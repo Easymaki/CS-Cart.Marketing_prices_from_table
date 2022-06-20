@@ -7,8 +7,6 @@
         <a class="cm-popover btn hand" href="{"exim.export&section=cart_prices_chart"|fn_url}">{__("export")}</a>
         <a class="cm-popover btn hand" href="{"exim.import&section=cart_prices_chart"|fn_url}">{__("import")}</a>
         <div class="buttons-container">
-           {* {include file="buttons/save_cancel.tpl" but_text=__("update_chart") but_name="dispatch[cart_prices.update_chart]"  but_role="submit-link" but_target_form="cart_prices_chart" save=$action}
-            {include file="buttons/save_cancel.tpl" but_text=__("download_csv") but_name="dispatch[cart_prices.export]"} *}
             {include file="buttons/save_cancel.tpl" but_text="{__("save")}" but_role="submit-link" but_target_form="cart_prices_chart" but_name="dispatch[cart_prices.edit]"}
         </div>
         <div class="table-responsive-wrapper cart-price-chart">
