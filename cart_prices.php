@@ -23,15 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     return array(CONTROLLER_STATUS_OK, 'cart_prices.manage');
 }
 
-if ($mode == 'manage') {
+if ($mode == 'manage') || ($mode == 'edit') {
     $chart = fn_get_cart_prices_chart();
 
-    Tygh::$app['view']->assign('chart', $chart);  
-}
-
-if ($mode == 'edit') {
-    $chart = fn_get_cart_prices_chart();
-    
     Tygh::$app['view']->assign('chart', $chart);  
 }
 
