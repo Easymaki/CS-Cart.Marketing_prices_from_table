@@ -20,11 +20,11 @@
             </tr>
         </thead>
         {foreach from=$chart item=item}
-        <tr>
-            <td>{$item.low_range}</td>
-            <td>{$item.high_range}</td>
-            <td>{$item.price}</td>
-        </tr>
+            <tr>
+                <td>{$item.low_range}</td>
+                <td>{$item.high_range}</td>
+                <td>{$item.price}</td>
+            </tr>
         {/foreach}
         </table>
     </div>
