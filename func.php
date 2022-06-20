@@ -35,9 +35,9 @@ function fn_update_cart_prices_chart($data)
 function fn_update_prices($category_id, $group_id, $status)
 {
     $result = array(
-		'products' => array(),
-        	'file' => ''
-	);
+	'products' => array(),
+	'file' => ''
+    );
     
     $chart = fn_get_cart_prices_chart();
 
@@ -48,7 +48,7 @@ function fn_update_prices($category_id, $group_id, $status)
     }
 
     if (!empty($group_id)) {
-		$category_ids = db_get_fields("SELECT category_id FROM ?:ecl_category_group_links WHERE group_id = ?i", $group_id);
+	$category_ids = db_get_fields("SELECT category_id FROM ?:category_group_links WHERE group_id = ?i", $group_id);
     }
 
     if (!empty($category_id)) {
@@ -61,19 +61,16 @@ function fn_update_prices($category_id, $group_id, $status)
             LEFT JOIN ?:products as d ON d.product_id=f.product_id AND f.category_id = ?i WHERE d.update_price = ?s", $category_id, 'Y');
         }
     } else {
-        $products_ids = db_get_fields("SELECT product_id FROM ?:products WHERE update_price = ?s", 'Y');
+        $products_ids = db_get_fields("SELECT product_id FROM ?:products");
     }
 
     if (!empty($products_ids)) {
         foreach ($products_ids as $product_id) {
-            $product_prices = db_get_row("SELECT price, foil_price FROM ?:product_prices WHERE product_id = ?i", $product_id);
-            $rarity = db_get_field("SELECT rariry FROM ?:products WHERE product_id = ?i", $product_id);
+            $product_prices = db_get_row("SELECT price FROM ?:product_prices WHERE product_id = ?i", $product_id);
             if (!empty($product_prices)) {
                 $price = $product_prices['price'];
-                $foil_price = $product_prices['foil_price'];
-                
+               
                 $updated_price = fn_get_price_from_chart($chart, $price, $rarity);
-                $updated_foil_price = fn_get_price_from_chart($chart, $foil_price, $rarity);
 
                 if (($price != $updated_price) || ($foil_price != $updated_foil_price)) {
 
@@ -81,13 +78,10 @@ function fn_update_prices($category_id, $group_id, $status)
 
                     $result['products'][$product_id] = array(
                         'card_name' => $product_data['product'],
-                        'rarity' =>  $rarity,
                         'stock' => $product_data['amount'],
                         'old_price' => $price,
                         'new_price' => $updated_price,
-                        'old_foil_price' => $foil_price,
-                        'updated_foil_price' => $updated_foil_price
-				    );
+		    );
 
                     // update data into db
                     if ($status == 'update') {
@@ -100,8 +94,9 @@ function fn_update_prices($category_id, $group_id, $status)
                             db_query("UPDATE ?:product_prices SET ?u WHERE product_id = ?i", $_data, $product_id);
 			}
 	    	}
-                    // write data to file
-		$dir = fn_get_public_files_path() . "ecl_cart_prices/";
+			
+                // write data to file
+		$dir = fn_get_public_files_path() . "updated_prices/";
 		$file_name = 'product_update_results_'.date("Ymd_His").'.csv';
 		fn_rm($dir);
 		fn_mkdir($dir);
@@ -109,7 +104,7 @@ function fn_update_prices($category_id, $group_id, $status)
 		$file = fopen( $file_path, 'w' );
 			
 		if ($file) {
-			fputcsv($file, array('Card Name', 'Rarity', 'Stock', 'Old Price', 'New Price', 'Old Foil Price', 'New Foil Price'));
+			fputcsv($file, array('Card Name', 'Stock', 'Old Price', 'New Price'));
 			
 			foreach($result['products'] as $line) {
 				fputcsv($file, $line);
