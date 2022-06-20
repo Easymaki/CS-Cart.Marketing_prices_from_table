@@ -49,9 +49,8 @@
             <table class="table table-middle table-objects table-responsive" border="1" cellspacing="0" cellpadding="0" border-color: #ccc;">
                 <thead>
                     <tr>
-                        <th>{__("set_name")}</th>
-                        <th>{__("card_name")}</th>
-                        <th>{__("rarity")}</th>
+                        <th>{__("category")}</th>
+                        <th>{__("product")}</th>
                         <th>{__("stock")}</th>
                         <th>{__("old_price")}</th>
                         <th>{__("new_price")}</th>
@@ -62,9 +61,8 @@
                 <tbody>
                     {foreach from=$updated_products.products  item=product}
                         <tr>
-                            <td>{$product.set_name}</td>
-                            <td>{$product.card_name}</td>
-                            <td>{$product.rarity}</td>
+                            <td>{$product.category}</td>
+                            <td>{$product.product}</td>
                             <td>{$product.stock}</td>
                             <td>{$product.old_price}</td>
                             <td>{$product.new_price}</td>
