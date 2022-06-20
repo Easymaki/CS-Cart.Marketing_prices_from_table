@@ -5,7 +5,7 @@ $schema['central']['product_data'] = array(
     'items' => array(
         'cart_prices' => array(
             'href' => 'cart_prices.manage',
-            'position' => 300,
+            'position' => 100,
         ),
     )
 );
