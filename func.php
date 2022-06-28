@@ -71,7 +71,7 @@ function fn_update_prices($category_id, $group_id, $status)
                
                 $updated_price = fn_get_price_from_chart($chart, $price, $rarity);
 
-                if (($price != $updated_price) || ($foil_price != $updated_foil_price)) {
+                if (($price != $updated_price) {
 
                     $product_data = db_get_row("SELECT f.product, d.amount FROM ?:product_descriptions as f LEFT JOIN ?:products as d ON f.product_id = d.product_id WHERE f.product_id = ?i", $product_id);
 
@@ -84,14 +84,8 @@ function fn_update_prices($category_id, $group_id, $status)
 
                     // update data into db
                     if ($status == 'update') {
-                        $_data = array(
-                                'price' => $updated_price,
-                                'foil_price' => $updated_foil_price,	
-                            );
-
-                        if (!empty($_data)) {
-                            db_query("UPDATE ?:product_prices SET ?u WHERE product_id = ?i", $_data, $product_id);
-			}
+                            db_query("UPDATE ?:product_prices SET ?u WHERE product_id = ?i", $updated_price, $product_id);
+		    }
 	    	}
 			
                 // write data to file
