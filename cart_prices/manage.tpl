@@ -1,5 +1,3 @@
-{** cart_prices section **}
-
 {capture name="mainbox"}
 
 <div class="table-responsive-wrapper edit-links-wrapper">
@@ -35,5 +33,3 @@
 {/capture}
 
 {include file="common/mainbox.tpl" title=__("cart_prices_menu") content=$smarty.capture.mainbox select_languages=true}
-
-{** cart_prices section **}
