@@ -31,7 +31,7 @@ function fn_update_cart_prices_chart($data)
     }
 }
 
-function fn_update_prices($category_id, $group_id, $status)
+function fn_update_prices($category_id, $status)
 {
     $result = array(
 	'products' => array(),
