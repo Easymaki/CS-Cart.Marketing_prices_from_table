@@ -14,10 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($mode == 'update' || $mode == 'preview') {
         $category_id = $_REQUEST['updated_option']['category'];
-        $group_id = $_REQUEST['updated_option']['group'];
         $status = $mode;
         
-        $result = fn_update_prices($category_id, $group_id, $status);
+        $result = fn_update_prices($category_id, $status);
         if (!empty($result)) {
             unset($_SESSION['result']);
             $_SESSION['result'] = $result;
