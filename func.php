@@ -76,7 +76,7 @@ function fn_update_prices($category_id, $status)
                     $product_data = db_get_row("SELECT f.product, d.amount FROM ?:product_descriptions as f LEFT JOIN ?:products as d ON f.product_id = d.product_id WHERE f.product_id = ?i", $product_id);
 
                     $result['products'][$product_id] = array(
-                        'card_name' => $product_data['product'],
+                        'name' => $product_data['product'],
                         'stock' => $product_data['amount'],
                         'old_price' => $price,
                         'new_price' => $updated_price,
@@ -97,7 +97,7 @@ function fn_update_prices($category_id, $status)
 		$file = fopen( $file_path, 'w' );
 			
 		if ($file) {
-			fputcsv($file, array('Card Name', 'Stock', 'Old Price', 'New Price'));
+			fputcsv($file, array('Name', 'Stock', 'Old Price', 'New Price'));
 			
 			foreach($result['products'] as $line) {
 				fputcsv($file, $line);
@@ -124,8 +124,8 @@ function fn_get_price_from_chart($chart, $cprice, $rarity)
     foreach ($chart as $row) {
         if ($cprice >= $row['low_range'] && $cprice <= $row['high_range']) {
             $result_price = $row['price'];
-        } elseif (empty($result_price)) {
-                $result_price = $cprice;
+        } else {
+             $result_price = $cprice;
         }
     }
     return $result_price;
